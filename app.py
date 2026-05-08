@@ -45,7 +45,7 @@ with st.container(border=True):
     st.subheader("🌱 自己資源・強み発見アシスタント")
     st.write("「なんでもない」と思っている経験から，ビジネスで通用する立派な「強み」をAIと見つけ出します。自己PRのネタ探しや，自分の価値を再発見したい時におすすめです。")
     # ↓取得済みのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://[強み発見アプリのURL]")
+    st.link_button("👉 このアプリを開く", "https://skills-translation-app.streamlit.app/")
 
 st.write("") 
 
