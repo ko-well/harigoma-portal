@@ -35,7 +35,7 @@ with st.container(border=True):
     st.subheader("📝 志望動機添削アシスタント")
     st.write("求人情報とあなたの経験を照らし合わせ，プロの視点で志望動機をブラッシュアップします。応募書類の作成に迷ったり，より説得力のある文章に仕上げたい時に活用してください。（※ゼロからの作成もサポートします）")
     # ⚠️ 実際の志望動機アプリのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://[志望動機アプリのURL]")
+    st.link_button("👉 このアプリを開く", "https://career-shibou-app.streamlit.app/")
 
 st.write("") 
 
@@ -44,7 +44,7 @@ with st.container(border=True):
     st.subheader("🌱 自己資源・強み発見アシスタント")
     st.write("「なんでもない」と思っている経験から，ビジネスで通用する立派な「強み」をAIと見つけ出します。自己PRのネタ探しや，自分の価値を再発見したい時におすすめです。")
     # ⚠️ 実際の強み発見アプリのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://[強み発見アプリのURL]")
+    st.link_button("👉 このアプリを開く", "https://skills-translation-app.streamlit.app/")
 
 st.write("") 
 
