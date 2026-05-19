@@ -1,7 +1,6 @@
 import streamlit as st
 
 # --- ページ設定 ---
-# ページ全体を広く使い，タイトルを設定します
 st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="centered")
 
 # --- カスタムデザイン（CSS） ---
@@ -31,28 +30,46 @@ st.markdown("""
 
 # --- アプリ一覧（カード型デザイン） ---
 
-# 1. 志望動機添削アプリ（枠線で囲んでカードのように見せます）
+# 1. 志望動機添削アプリ
 with st.container(border=True):
     st.subheader("📝 志望動機添削アシスタント")
     st.write("求人情報とあなたの経験を照らし合わせ，プロの視点で志望動機をブラッシュアップします。応募書類の作成に迷ったり，より説得力のある文章に仕上げたい時に活用してください。（※ゼロからの作成もサポートします）")
-    # ↓取得済みのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://career-shibou-app.streamlit.app/")
+    # ⚠️ 実際の志望動機アプリのURLに書き換えてください
+    st.link_button("👉 このアプリを開く", "https://[志望動機アプリのURL]")
 
-st.write("") # 少し隙間を空ける
+st.write("") 
 
 # 2. ポータブルスキル（強み）発見アプリ
 with st.container(border=True):
     st.subheader("🌱 自己資源・強み発見アシスタント")
     st.write("「なんでもない」と思っている経験から，ビジネスで通用する立派な「強み」をAIと見つけ出します。自己PRのネタ探しや，自分の価値を再発見したい時におすすめです。")
-    # ↓取得済みのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://skills-translation-app.streamlit.app/")
+    # ⚠️ 実際の強み発見アプリのURLに書き換えてください
+    st.link_button("👉 このアプリを開く", "https://[強み発見アプリのURL]")
 
 st.write("") 
 
-# 3. ABCDE理論アプリ
+# 3. 【新登場】自己PR作成ステップ1：キャリアの棚卸し
 with st.container(border=True):
-    st.subheader("💡 思考の変換サポート（ABCDE理論）")
-    st.write("モヤモヤする出来事やネガティブな感情を整理し，客観的な視点で「合理的な思考」へと変換するサポートを行います。面接前の不安解消や，日々のストレスケアにご活用ください。")
+    st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
+    st.write("ジョブカードの職務内容をコピペするだけで，AIが「役割・行動・結果」をきれいに整理します。AIからの優しい質問に答えるだけで，あなただけの『棚卸し完了シート（資料1）』が完成します。")
+    # 公開されたURLを設定済みです
+    st.link_button("👉 このアプリを開く", "https://harigoma-inventory.streamlit.app/")
+
+st.write("") 
+
+# 4. 【新登場】自己PR作成ステップ2：キャリア・アンカー診断
+with st.container(border=True):
+    st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
+    st.write("40の質問から、仕事で絶対に譲れない軸（キャリア・アンカー）を自動集計して特定します。ステップ1で集めた素材と組み合わせて、実際の就職活動で使える『自己PR設計図（資料2）』を作り上げます。")
+    # 公開されたURLを設定済みです
+    st.link_button("👉 このアプリを開く", "https://harigoma-anchor.streamlit.app/")
+
+st.write("") 
+
+# 5. 心のモヤモヤ解消・ストレスケアアシスタント（ver.2仕様にアップデート）
+with st.container(border=True):
+    st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
+    st.write("就職活動や仕事の中で感じるストレス，対人関係のモヤモヤした出来事を書き出すことで，AIがあなたの心に寄り添いながら，気持ちが軽くなる『新しい捉え方』を一緒に見つけます。AIとの対話で納得いくまで相談できます。")
     st.link_button("👉 このアプリを開く", "https://abcde-support-app.streamlit.app/")
 
 st.markdown("---")
