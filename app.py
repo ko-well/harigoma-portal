@@ -30,7 +30,7 @@ st.markdown("""
 
 # --- アプリ一覧（カード型デザイン） ---
 
-# 1. 志望動機添削アシスタント（元々のアプリを残しています）
+# 1. 志望動機添削アシスタント
 with st.container(border=True):
     st.subheader("📝 志望動機添削アシスタント")
     st.write("求人情報とあなたの経験を照らし合わせ，プロの視点で志望動機をブラッシュアップします。応募書類の作成に迷ったり，より説得力のある文章に仕上げたい時に活用してください。（※ゼロからの作成もサポートします）")
@@ -39,7 +39,7 @@ with st.container(border=True):
 
 st.write("") 
 
-# 2. 【新登場】ゼロから育てる！志望動機作成アシスタント（新しく独立して追加しました）
+# 2. ゼロから育てる！志望動機作成アシスタント
 with st.container(border=True):
     st.subheader("🌱 ゼロから育てる！志望動機作成アシスタント")
     st.write("AIが答えを出すのではなく，対話を通じてあなたの中にある本音や強みを引き出します。AIからの質問に答えながら，何度もやり取りを重ねて，もっとも納得できるあなただけの志望動機を少しずつ育てていきます。")
@@ -51,7 +51,7 @@ st.write("")
 with st.container(border=True):
     st.subheader("✨ 自己資源・強み発見アシスタント")
     st.write("「なんでもない」と思っている経験から，ビジネスで通用する立派な「強み」をAIと見つけ出します。自己PRのネタ探しや，自分の価値を再発見したい時におすすめです。")
-    # ⚠️ 実際の強み発見アプリのURLが分かりましたら、ここを書き換えてください
+    # ⚠️ 実際の強み発見アプリのURLに書き換えてください
     st.link_button("👉 このアプリを開く", "https://skills-translation-app.streamlit.app/")
 
 st.write("") 
@@ -77,6 +77,14 @@ with st.container(border=True):
     st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
     st.write("就職活動や仕事の中で感じるストレス，対人関係のモヤモヤした出来事を書き出すことで，AIがあなたの心に寄り添いながら，気持ちが軽くなる『新しい捉え方』を一緒に見つけます。AIとの対話で納得いくまで相談できます。")
     st.link_button("👉 このアプリを開く", "https://abcde-support-app.streamlit.app/")
+
+st.write("") 
+
+# 7. 仕事理解AIアプリ
+with st.container(border=True):
+    st.subheader("🧩 自己理解から仕事理解へ：わたしに合う働き方発見アシスタント")
+    st.write("「〇〇職がいい」「あの仕事は嫌だ」という思い込み（職種名）を一度外して、あなたに本当に合った安心できる働き方をAIが提案します。職種名を伏せた「1日のストーリー」を疑似体験して、自分に合った現実的な仕事に出会いましょう。")
+    st.link_button("👉 このアプリを開く", "https://harigoma-job-style.streamlit.app/")
 
 st.markdown("---")
 st.caption("© C.HARIGOMA Career Support")
