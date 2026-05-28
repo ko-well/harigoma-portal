@@ -1,29 +1,103 @@
 import streamlit as st
+import base64
+import os
 
 # --- ページ設定 ---
 st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
+
+# --- 画像を背景用に変換する魔法の関数 ---
+@st.cache_data
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+# --- 背景画像のCSS動的生成 ---
+bg_css = ""
+image_path = "niigata_sakura.jpg"
+
+if os.path.exists(image_path):
+    img_base64 = get_base64_of_bin_file(image_path)
+    # ここで「明るめ（brightness）」と「ぼかし（blur）」を設定しています
+    bg_css = f"""
+    <style>
+    .header-box {{
+        position: relative;
+        text-align: center;
+        padding: 5rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }}
+    .header-box::before {{
+        content: "";
+        position: absolute;
+        top: -20px; left: -20px; right: -20px; bottom: -20px; /* ぼかしの端が見えないように少し広げる */
+        background-image: url("data:image/jpeg;base64,{img_base64}");
+        background-size: cover;
+        background-position: center;
+        filter: blur(6px) brightness(1.2); /* ぼかし(6px) と 明るさ(1.2倍) */
+        z-index: 0;
+    }}
+    /* 画像の上に薄い白いフィルターをかけて、文字をさらに読みやすくする */
+    .header-overlay {{
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: rgba(255, 255, 255, 0.4);
+        z-index: 1;
+    }}
+    .header-content {{
+        position: relative;
+        z-index: 2;
+    }}
+    </style>
+    """
+else:
+    # 万が一画像が見つからなかった場合の予備デザイン
+    bg_css = """
+    <style>
+    .header-box {
+        text-align: center;
+        padding: 4rem 1rem;
+        background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 2rem;
+        border-radius: 12px;
+    }
+    .header-content { position: relative; z-index: 2; }
+    </style>
+    """
+
+st.markdown(bg_css, unsafe_allow_html=True)
 
 # --- カスタムCSS（大人向け・プロフェッショナルデザイン） ---
 st.markdown("""
 <style>
 /* 全体のカラースキームとフォント */
 :root {
-    --primary: #1F2937; /* 深いネイビーグレー */
-    --secondary: #3B82F6; /* 落ち着いたブルー */
+    --primary: #1F2937;
+    --secondary: #3B82F6;
     --bg-gray: #F9FAFB;
 }
 h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
 
-/* ヘッダーデザイン */
-.header-box {
-    text-align: center;
-    padding: 3rem 1rem;
-    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 2rem;
+/* ヘッダーの文字デザイン（背景に負けないように影をつける） */
+.header-title { 
+    font-size: 2.6rem; 
+    font-weight: 800; 
+    color: #111827; 
+    letter-spacing: 0.05em; 
+    text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
 }
-.header-title { font-size: 2.2rem; font-weight: 700; color: #111827; letter-spacing: 0.05em; }
-.header-subtitle { font-size: 1.1rem; color: #4B5563; margin-top: 1rem; line-height: 1.6; }
+.header-subtitle { 
+    font-size: 1.2rem; 
+    color: #111827; 
+    margin-top: 1rem; 
+    line-height: 1.6; 
+    font-weight: 700;
+    text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
+}
 
 /* カテゴリ見出し */
 .category-header {
@@ -39,7 +113,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     padding-bottom: 10px;
 }
 
-/* ★修正箇所：ボタンのデザイン（落ち着いたブルーに変更し、文字を確実に白にする） */
+/* ボタンのデザイン（落ち着いたブルーに変更し、文字を確実に白にする） */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
@@ -47,7 +121,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
 }
 [data-testid="stLinkButton"] a,
 [data-testid="stLinkButton"] button {
-    background-color: #3498DB !important; /* 黒から、落ち着いたブルーに変更 */
+    background-color: #3498DB !important; 
     color: #ffffff !important;
     border: none !important;
     border-radius: 6px !important;
@@ -58,7 +132,6 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
-/* ボタン内のテキスト（pタグなど）が黒色に上書きされるのを防ぐ魔法のコード */
 [data-testid="stLinkButton"] a *,
 [data-testid="stLinkButton"] button * {
     color: #ffffff !important;
@@ -78,17 +151,13 @@ p { font-size: 0.95rem; color: #4B5563; line-height: 1.6; }
 # --- トップ画面ヘッダー ---
 st.markdown('''
 <div class="header-box">
-    <div class="header-title">C.HARIGOMA キャリア支援ポータル</div>
-    <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
+    <div class="header-overlay"></div>
+    <div class="header-content">
+        <div class="header-title">C.HARIGOMA キャリア支援ポータル</div>
+        <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
+    </div>
 </div>
 ''', unsafe_allow_html=True)
-
-# --- 画像の表示 ---
-try:
-    st.image("niigata_sakura.jpg", use_container_width=True, caption="新潟市の風景（万代橋と桜）")
-except:
-    st.info("※画像読み込み中...")
-
 
 # ==================================================
 # 【応募書類関連】
