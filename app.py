@@ -18,7 +18,6 @@ image_path = "niigata_sakura.jpg"
 
 if os.path.exists(image_path):
     img_base64 = get_base64_of_bin_file(image_path)
-    # ここで「明るめ（brightness）」と「ぼかし（blur）」を設定しています
     bg_css = f"""
     <style>
     .header-box {{
@@ -33,14 +32,13 @@ if os.path.exists(image_path):
     .header-box::before {{
         content: "";
         position: absolute;
-        top: -20px; left: -20px; right: -20px; bottom: -20px; /* ぼかしの端が見えないように少し広げる */
+        top: -20px; left: -20px; right: -20px; bottom: -20px;
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
         background-position: center;
-        filter: blur(6px) brightness(1.2); /* ぼかし(6px) と 明るさ(1.2倍) */
+        filter: blur(6px) brightness(1.2);
         z-index: 0;
     }}
-    /* 画像の上に薄い白いフィルターをかけて、文字をさらに読みやすくする */
     .header-overlay {{
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -54,7 +52,6 @@ if os.path.exists(image_path):
     </style>
     """
 else:
-    # 万が一画像が見つからなかった場合の予備デザイン
     bg_css = """
     <style>
     .header-box {
@@ -71,21 +68,26 @@ else:
 
 st.markdown(bg_css, unsafe_allow_html=True)
 
-# --- カスタムCSS（大人向け・プロフェッショナルデザイン） ---
+# --- カスタムCSS（游明朝を取り入れた洗練デザイン） ---
 st.markdown("""
 <style>
-/* 全体のカラースキームとフォント */
+/* ★全体のフォントを游明朝（Yu Mincho）などの美しい明朝体に一括変更 */
+html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Yu Mincho', '游明朝', 'YuMincho', 'Hiragino Mincho ProN', 'HGS明朝E', serif !important;
+}
+
 :root {
     --primary: #1F2937;
     --secondary: #3B82F6;
     --bg-gray: #F9FAFB;
 }
-h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
 
-/* ヘッダーの文字デザイン（背景に負けないように影をつける） */
+h1, h2, h3 { color: var(--primary) !important; }
+
+/* ヘッダーの文字デザイン */
 .header-title { 
     font-size: 2.6rem; 
-    font-weight: 800; 
+    font-weight: 700; 
     color: #111827; 
     letter-spacing: 0.05em; 
     text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
@@ -94,8 +96,8 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     font-size: 1.2rem; 
     color: #111827; 
     margin-top: 1rem; 
-    line-height: 1.6; 
-    font-weight: 700;
+    line-height: 1.8; 
+    font-weight: 600;
     text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
 }
 
@@ -105,7 +107,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     padding-left: 15px;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #1F2937;
     background-color: #F3F4F6;
@@ -113,7 +115,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     padding-bottom: 10px;
 }
 
-/* ボタンのデザイン（落ち着いたブルーに変更し、文字を確実に白にする） */
+/* ボタンのデザイン */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
@@ -126,11 +128,12 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     border: none !important;
     border-radius: 6px !important;
     padding: 0.6rem 2rem !important;
-    font-size: 1rem !important;
+    font-size: 1.1rem !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    letter-spacing: 0.05em;
 }
 [data-testid="stLinkButton"] a *,
 [data-testid="stLinkButton"] button * {
@@ -144,7 +147,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
 }
 
 /* コンテナ内のテキスト調整 */
-p { font-size: 0.95rem; color: #4B5563; line-height: 1.6; }
+p { font-size: 1rem; color: #374151; line-height: 1.7; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -160,7 +163,7 @@ st.markdown('''
 ''', unsafe_allow_html=True)
 
 # ==================================================
-# 【応募書類関連】
+# 【応募書類関連】 (ステップ1, 2をこちらへ移動)
 # ==================================================
 st.markdown('<div class="category-header">【応募書類関連】</div>', unsafe_allow_html=True)
 
@@ -176,30 +179,30 @@ with col2:
         st.write("AIとの対話を通じてあなたの中にある強みを引き出し、納得のいく志望動機をゼロから一緒に作ります。")
         st.link_button("アプリを開く", "https://harigoma-motivation.streamlit.app/")
 
+col3, col4 = st.columns(2)
+with col3:
+    with st.container(border=True):
+        st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
+        st.write("職務経歴から「役割・行動・結果」を整理し、自己PRの基礎となる素材（棚卸しシート）を作ります。")
+        st.link_button("アプリを開く", "https://harigoma-inventory.streamlit.app/")
+with col4:
+    with st.container(border=True):
+        st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
+        st.write("40の質問から仕事の軸を特定し、ステップ1の素材と組み合わせて自己PRを完成させます。")
+        st.link_button("アプリを開く", "https://harigoma-anchor.streamlit.app/")
+
 
 # ==================================================
 # 【自己理解・仕事理解関連】
 # ==================================================
 st.markdown('<div class="category-header">【自己理解・仕事理解関連】</div>', unsafe_allow_html=True)
 
-col3, col4 = st.columns(2)
-with col3:
+col5, col6 = st.columns(2)
+with col5:
     with st.container(border=True):
         st.subheader("✨ 自己資源・強み発見アシスタント")
         st.write("これまでの何気ない経験から、ビジネスで通用する「強み」や「ポータブルスキル」を見つけ出します。")
         st.link_button("アプリを開く", "https://skills-translation-app.streamlit.app/")
-with col4:
-    with st.container(border=True):
-        st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
-        st.write("職務経歴から「役割・行動・結果」を整理し、自己PRの基礎となる素材（棚卸しシート）を作ります。")
-        st.link_button("アプリを開く", "https://harigoma-inventory.streamlit.app/")
-
-col5, col6 = st.columns(2)
-with col5:
-    with st.container(border=True):
-        st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
-        st.write("40の質問から仕事の軸を特定し、ステップ1の素材と組み合わせて自己PRを完成させます。")
-        st.link_button("アプリを開く", "https://harigoma-anchor.streamlit.app/")
 with col6:
     with st.container(border=True):
         st.subheader("🧩 自己理解から仕事理解へ：わたしに合う働き方発見アシスタント")
