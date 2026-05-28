@@ -27,7 +27,7 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
 
 /* カテゴリ見出し */
 .category-header {
-    border-left: 6px solid #3B82F6;
+    border-left: 6px solid #3498DB;
     padding-left: 15px;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
@@ -39,25 +39,35 @@ h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Ar
     padding-bottom: 10px;
 }
 
-/* ボタンの大人なデザイン化 */
+/* ★修正箇所：ボタンのデザイン（落ち着いたブルーに変更し、文字を確実に白にする） */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
+    margin-top: 15px;
 }
-[data-testid="stLinkButton"] a {
-    background-color: #1F2937 !important;
+[data-testid="stLinkButton"] a,
+[data-testid="stLinkButton"] button {
+    background-color: #3498DB !important; /* 黒から、落ち着いたブルーに変更 */
     color: #ffffff !important;
     border: none !important;
-    border-radius: 4px !important;
-    padding: 0.5rem 2rem !important;
+    border-radius: 6px !important;
+    padding: 0.6rem 2rem !important;
     font-size: 1rem !important;
-    font-weight: 500 !important;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
 }
-[data-testid="stLinkButton"] a:hover {
-    background-color: #374151 !important;
+/* ボタン内のテキスト（pタグなど）が黒色に上書きされるのを防ぐ魔法のコード */
+[data-testid="stLinkButton"] a *,
+[data-testid="stLinkButton"] button * {
+    color: #ffffff !important;
+}
+[data-testid="stLinkButton"] a:hover,
+[data-testid="stLinkButton"] button:hover {
+    background-color: #2980B9 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important;
+    transform: translateY(-2px);
 }
 
 /* コンテナ内のテキスト調整 */
@@ -74,7 +84,6 @@ st.markdown('''
 ''', unsafe_allow_html=True)
 
 # --- 画像の表示 ---
-# ※GitHubに「万代橋　桜.jpg」をアップロードすると自動で表示されます。
 try:
     st.image("万代橋　桜.jpg", use_container_width=True, caption="新潟市の風景（万代橋と桜）")
 except:
