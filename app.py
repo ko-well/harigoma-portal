@@ -1,90 +1,149 @@
 import streamlit as st
 
 # --- ページ設定 ---
-st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="centered")
+st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
 
-# --- カスタムデザイン（CSS） ---
+# --- カスタムCSS（大人向け・プロフェッショナルデザイン） ---
 st.markdown("""
 <style>
-/* 全体の文字色や見出しの調整 */
-h1, h2, h3 { color: #2C3E50 !important; }
-/* ボタンのデザイン強化 */
-[data-testid="stLinkButton"] { display: flex; justify-content: center; }
-[data-testid="stLinkButton"] a { background-color: #3498DB !important; color: white !important; font-size: 18px !important; font-weight: bold !important; padding: 10px 30px !important; border-radius: 8px !important; text-decoration: none !important; width: 100%; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease; }
-[data-testid="stLinkButton"] a:hover { background-color: #2980B9 !important; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transform: translateY(2px); }
-/* ヘッダー部分の背景 */
-.header-box { background-color: #EBF5FB; padding: 20px; border-radius: 10px; margin-bottom: 30px; text-align: center; }
+/* 全体のカラースキームとフォント */
+:root {
+    --primary: #1F2937; /* 深いネイビーグレー */
+    --secondary: #3B82F6; /* 落ち着いたブルー */
+    --bg-gray: #F9FAFB;
+}
+h1, h2, h3 { color: var(--primary) !important; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+/* ヘッダーデザイン */
+.header-box {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 2rem;
+}
+.header-title { font-size: 2.2rem; font-weight: 700; color: #111827; letter-spacing: 0.05em; }
+.header-subtitle { font-size: 1.1rem; color: #4B5563; margin-top: 1rem; line-height: 1.6; }
+
+/* カテゴリ見出し */
+.category-header {
+    border-left: 6px solid #3B82F6;
+    padding-left: 15px;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1F2937;
+    background-color: #F3F4F6;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* ボタンの大人なデザイン化 */
+[data-testid="stLinkButton"] {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+[data-testid="stLinkButton"] a {
+    background-color: #1F2937 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 0.5rem 2rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+[data-testid="stLinkButton"] a:hover {
+    background-color: #374151 !important;
+}
+
+/* コンテナ内のテキスト調整 */
+p { font-size: 0.95rem; color: #4B5563; line-height: 1.6; }
 </style>
 """, unsafe_allow_html=True)
 
 # --- トップ画面ヘッダー ---
-st.markdown("""
+st.markdown('''
 <div class="header-box">
-    <h1 style='margin-bottom: 0;'>🚪 キャリア支援ポータル</h1>
-    <p style='font-size: 18px; color: #555; margin-top: 10px;'>
-        ご自身のペースで，就職活動や自己理解を進めるためのサポートツール集です。<br>
-        はじめての方でも使いやすいように設計されています。目的に合わせてご活用ください。
-    </p>
+    <div class="header-title">C.HARIGOMA キャリア支援ポータル</div>
+    <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
 </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
-# --- アプリ一覧（カード型デザイン） ---
+# --- 画像の表示 ---
+# ※GitHubに「万代橋　桜.jpg」をアップロードすると自動で表示されます。
+try:
+    st.image("万代橋　桜.jpg", use_container_width=True, caption="新潟市の風景（万代橋と桜）")
+except:
+    st.info("※ここに「万代橋　桜.jpg」が表示されます。（GitHubに画像をアップロードしてください）")
 
-# 1. 志望動機添削アシスタント
-with st.container(border=True):
-    st.subheader("📝 志望動機添削アシスタント")
-    st.write("求人情報とあなたの経験を照らし合わせ，プロの視点で志望動機をブラッシュアップします。応募書類の作成に迷ったり，より説得力のある文章に仕上げたい時に活用してください。（※ゼロからの作成もサポートします）")
-    # ⚠️ 実際の志望動機アプリのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://career-shibou-app.streamlit.app/")
 
-st.write("") 
+# ==================================================
+# 【応募書類関連】
+# ==================================================
+st.markdown('<div class="category-header">【応募書類関連】</div>', unsafe_allow_html=True)
 
-# 2. ゼロから育てる！志望動機作成アシスタント
-with st.container(border=True):
-    st.subheader("🌱 ゼロから育てる！志望動機作成アシスタント")
-    st.write("AIが答えを出すのではなく，対話を通じてあなたの中にある本音や強みを引き出します。AIからの質問に答えながら，何度もやり取りを重ねて，もっとも納得できるあなただけの志望動機を少しずつ育てていきます。")
-    st.link_button("👉 このアプリを開く", "https://harigoma-motivation.streamlit.app/")
+col1, col2 = st.columns(2)
+with col1:
+    with st.container(border=True):
+        st.subheader("📝 志望動機添削アシスタント")
+        st.write("ご自身で書いた志望動機を、求人情報と照らし合わせてプロの視点で添削・ブラッシュアップします。")
+        st.link_button("アプリを開く", "https://career-shibou-app.streamlit.app/")
+with col2:
+    with st.container(border=True):
+        st.subheader("🌱 ゼロから育てる！志望動機作成アシスタント")
+        st.write("AIとの対話を通じてあなたの中にある強みを引き出し、納得のいく志望動機をゼロから一緒に作ります。")
+        st.link_button("アプリを開く", "https://harigoma-motivation.streamlit.app/")
 
-st.write("") 
 
-# 3. ポータブルスキル（強み）発見アプリ
-with st.container(border=True):
-    st.subheader("✨ 自己資源・強み発見アシスタント")
-    st.write("「なんでもない」と思っている経験から，ビジネスで通用する立派な「強み」をAIと見つけ出します。自己PRのネタ探しや，自分の価値を再発見したい時におすすめです。")
-    # ⚠️ 実際の強み発見アプリのURLに書き換えてください
-    st.link_button("👉 このアプリを開く", "https://skills-translation-app.streamlit.app/")
+# ==================================================
+# 【自己理解・仕事理解関連】
+# ==================================================
+st.markdown('<div class="category-header">【自己理解・仕事理解関連】</div>', unsafe_allow_html=True)
 
-st.write("") 
+col3, col4 = st.columns(2)
+with col3:
+    with st.container(border=True):
+        st.subheader("✨ 自己資源・強み発見アシスタント")
+        st.write("これまでの何気ない経験から、ビジネスで通用する「強み」や「ポータブルスキル」を見つけ出します。")
+        st.link_button("アプリを開く", "https://skills-translation-app.streamlit.app/")
+with col4:
+    with st.container(border=True):
+        st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
+        st.write("職務経歴から「役割・行動・結果」を整理し、自己PRの基礎となる素材（棚卸しシート）を作ります。")
+        st.link_button("アプリを開く", "https://harigoma-inventory.streamlit.app/")
 
-# 4. 自己PR作成ステップ1：キャリアの棚卸し
-with st.container(border=True):
-    st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
-    st.write("ジョブカードの職務内容をコピペするだけで，AIが「役割・行動・結果」をきれいに整理します。AIからの優しい質問に答えるだけで，あなただけの『棚卸し完了シート（資料1）』が完成します。")
-    st.link_button("👉 このアプリを開く", "https://harigoma-inventory.streamlit.app/")
+col5, col6 = st.columns(2)
+with col5:
+    with st.container(border=True):
+        st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
+        st.write("40の質問から仕事の軸を特定し、ステップ1の素材と組み合わせて自己PRを完成させます。")
+        st.link_button("アプリを開く", "https://harigoma-anchor.streamlit.app/")
+with col6:
+    with st.container(border=True):
+        st.subheader("🧩 自己理解から仕事理解へ：わたしに合う働き方発見アシスタント")
+        st.write("職種名の先入観を外し、あなたが本当に安心できる働き方（環境）をAIと一緒に見つけます。")
+        st.link_button("アプリを開く", "https://harigoma-job-style.streamlit.app/")
 
-st.write("") 
 
-# 5. 自己PR作成ステップ2：キャリア・アンカー診断
-with st.container(border=True):
-    st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
-    st.write("40の質問から，仕事で絶対に譲れない軸（キャリア・アンカー）を自動集計して特定します。ステップ1で集めた素材と組み合わせて，実際の就職活動で使える『自己PR設計図（資料2）』を作り上げます。")
-    st.link_button("👉 このアプリを開く", "https://harigoma-anchor.streamlit.app/")
+# ==================================================
+# 【メンタル】
+# ==================================================
+st.markdown('<div class="category-header">【メンタル】</div>', unsafe_allow_html=True)
 
-st.write("") 
+col7, col8 = st.columns(2)
+with col7:
+    with st.container(border=True):
+        st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
+        st.write("就活や仕事でのストレスを吐き出し、気持ちが軽くなる「新しい捉え方」を一緒に見つけます。")
+        st.link_button("アプリを開く", "https://abcde-support-app.streamlit.app/")
 
-# 6. 心のモヤモヤ解消・ストレスケアアシスタント
-with st.container(border=True):
-    st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
-    st.write("就職活動や仕事の中で感じるストレス，対人関係のモヤモヤした出来事を書き出すことで，AIがあなたの心に寄り添いながら，気持ちが軽くなる『新しい捉え方』を一緒に見つけます。AIとの対話で納得いくまで相談できます。")
-    st.link_button("👉 このアプリを開く", "https://abcde-support-app.streamlit.app/")
-
-st.write("") 
-
-# 7. 仕事理解AIアプリ
-with st.container(border=True):
-    st.subheader("🧩 自己理解から仕事理解へ：わたしに合う働き方発見アシスタント")
-    st.write("「〇〇職がいい」「あの仕事は嫌だ」という思い込み（職種名）を一度外して、あなたに本当に合った安心できる働き方をAIが提案します。職種名を伏せた「1日のストーリー」を疑似体験して、自分に合った現実的な仕事に出会いましょう。")
-    st.link_button("👉 このアプリを開く", "https://harigoma-job-style.streamlit.app/")
+# レイアウト調整用の空カラム
+with col8:
+    st.write("") 
 
 st.markdown("---")
 st.caption("© C.HARIGOMA Career Support")
