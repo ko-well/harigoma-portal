@@ -85,9 +85,9 @@ st.markdown('''
 
 # --- 画像の表示 ---
 try:
-    st.image("万代橋　桜.jpg", use_container_width=True, caption="新潟市の風景（万代橋と桜）")
+    st.image("niigata_sakura.jpg", use_container_width=True, caption="新潟市の風景（万代橋と桜）")
 except:
-    st.info("※ここに「万代橋　桜.jpg」が表示されます。（GitHubに画像をアップロードしてください）")
+    st.info("※画像読み込み中...")
 
 
 # ==================================================
