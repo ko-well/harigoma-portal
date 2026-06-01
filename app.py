@@ -5,14 +5,13 @@ import os
 # --- ページ設定 ---
 st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
 
-# --- 画像を背景用に変換する魔法の関数 ---
 @st.cache_data
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
-# --- 背景画像のCSS動的生成 ---
+# --- 背景画像のCSS動的生成（トップ画像用） ---
 bg_css = ""
 image_path = "niigata_sakura.jpg"
 
@@ -24,10 +23,11 @@ if os.path.exists(image_path):
         position: relative;
         text-align: center;
         padding: 5rem 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem; /* 余白を広げてゆったりと */
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08); /* 影を少しリッチに */
+        animation: fadeInDown 1s ease-out forwards; /* 上からフワッと降りてくるアニメーション */
     }}
     .header-box::before {{
         content: "";
@@ -36,13 +36,13 @@ if os.path.exists(image_path):
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
         background-position: center;
-        filter: blur(6px) brightness(1.2);
+        filter: blur(5px) brightness(1.15);
         z-index: 0;
     }}
     .header-overlay {{
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background-color: rgba(255, 255, 255, 0.4);
+        background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.7)); /* グラデーションで下部を読みやすく */
         z-index: 1;
     }}
     .header-content {{
@@ -56,11 +56,11 @@ else:
     <style>
     .header-box {
         text-align: center;
-        padding: 4rem 1rem;
+        padding: 5rem 1rem;
         background: linear-gradient(to bottom, #ffffff, #f3f4f6);
-        border-bottom: 1px solid #e5e7eb;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
         border-radius: 12px;
+        animation: fadeInDown 1s ease-out forwards;
     }
     .header-content { position: relative; z-index: 2; }
     </style>
@@ -68,71 +68,108 @@ else:
 
 st.markdown(bg_css, unsafe_allow_html=True)
 
-# --- カスタムCSS（游明朝を取り入れた洗練デザイン） ---
+# --- カスタムCSS（壁紙・アニメーション・明朝体） ---
 st.markdown("""
 <style>
-/* ★全体のフォントを游明朝（Yu Mincho）などの美しい明朝体に一括変更 */
+/* 1. フォントの設定（游明朝） */
 html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     font-family: 'Yu Mincho', '游明朝', 'YuMincho', 'Hiragino Mincho ProN', 'HGS明朝E', serif !important;
 }
 
-:root {
-    --primary: #1F2937;
-    --secondary: #3B82F6;
-    --bg-gray: #F9FAFB;
+/* 2. ページ全体の壁紙（おすすめ：淡いグラデーション） */
+.stApp {
+    background: linear-gradient(135deg, #ffffff 0%, #f4f7f6 100%);
+    background-attachment: fixed; /* スクロールしても背景を固定 */
 }
 
-h1, h2, h3 { color: var(--primary) !important; }
+/* 3. アニメーションの定義（キーフレーム） */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
 
-/* ヘッダーの文字デザイン */
+/* 4. アプリカード（コンテナ）のデザインと動き */
+[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: rgba(255, 255, 255, 0.85) !important; /* 壁紙から浮き立たせるための半透明の白 */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px); /* すりガラス効果で高級感を */
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
+    padding: 10px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important; /* 滑らかな動き */
+    
+    /* 初期表示時の浮き上がりアニメーション */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+/* ホバー（マウスオーバー）時の動き */
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.1) !important;
+    background-color: rgba(255, 255, 255, 1) !important;
+}
+
+/* カードのアニメーションのタイミングを少しずつずらす（順番に現れる効果） */
+[data-testid="stVerticalBlockBorderWrapper"]:nth-child(1) { animation-delay: 0.1s; }
+[data-testid="stVerticalBlockBorderWrapper"]:nth-child(2) { animation-delay: 0.2s; }
+[data-testid="stVerticalBlockBorderWrapper"]:nth-child(3) { animation-delay: 0.3s; }
+[data-testid="stVerticalBlockBorderWrapper"]:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* ヘッダーテキスト */
 .header-title { 
-    font-size: 2.6rem; 
+    font-size: 2.8rem; 
     font-weight: 700; 
-    color: #111827; 
+    color: #1a202c; 
     letter-spacing: 0.05em; 
-    text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
+    text-shadow: 0px 2px 4px rgba(255,255,255,1); 
 }
 .header-subtitle { 
-    font-size: 1.2rem; 
-    color: #111827; 
-    margin-top: 1rem; 
+    font-size: 1.25rem; 
+    color: #2d3748; 
+    margin-top: 1.2rem; 
     line-height: 1.8; 
     font-weight: 600;
-    text-shadow: 0px 2px 5px rgba(255,255,255,0.9); 
+    text-shadow: 0px 2px 4px rgba(255,255,255,1); 
 }
 
 /* カテゴリ見出し */
 .category-header {
-    border-left: 6px solid #3498DB;
+    border-left: 5px solid #2980B9;
     padding-left: 15px;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    color: #1F2937;
-    background-color: #F3F4F6;
-    padding-top: 10px;
+    color: #2c3e50;
+    border-bottom: 1px solid #e2e8f0;
     padding-bottom: 10px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 /* ボタンのデザイン */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 [data-testid="stLinkButton"] a,
 [data-testid="stLinkButton"] button {
-    background-color: #3498DB !important; 
+    background-color: #2c3e50 !important; /* 少しシックなネイビーに変更 */
     color: #ffffff !important;
     border: none !important;
-    border-radius: 6px !important;
-    padding: 0.6rem 2rem !important;
+    border-radius: 8px !important;
+    padding: 0.7rem 2.5rem !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
     letter-spacing: 0.05em;
 }
 [data-testid="stLinkButton"] a *,
@@ -141,13 +178,14 @@ h1, h2, h3 { color: var(--primary) !important; }
 }
 [data-testid="stLinkButton"] a:hover,
 [data-testid="stLinkButton"] button:hover {
-    background-color: #2980B9 !important;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15) !important;
+    background-color: #34495e !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
     transform: translateY(-2px);
 }
 
-/* コンテナ内のテキスト調整 */
-p { font-size: 1rem; color: #374151; line-height: 1.7; }
+/* テキスト色調整 */
+h3 { color: #2d3748 !important; }
+p { font-size: 1.05rem; color: #4a5568; line-height: 1.7; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -163,7 +201,7 @@ st.markdown('''
 ''', unsafe_allow_html=True)
 
 # ==================================================
-# 【応募書類関連】 (ステップ1, 2をこちらへ移動)
+# 【応募書類関連】
 # ==================================================
 st.markdown('<div class="category-header">【応募書類関連】</div>', unsafe_allow_html=True)
 
@@ -222,7 +260,6 @@ with col7:
         st.write("就活や仕事でのストレスを吐き出し、気持ちが軽くなる「新しい捉え方」を一緒に見つけます。")
         st.link_button("アプリを開く", "https://abcde-support-app.streamlit.app/")
 
-# レイアウト調整用の空カラム
 with col8:
     st.write("") 
 
