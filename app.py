@@ -118,4 +118,153 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
 [data-testid="stVerticalBlockBorderWrapper"]:nth-child(1) { animation-delay: 0.1s; }
 [data-testid="stVerticalBlockBorderWrapper"]:nth-child(2) { animation-delay: 0.2s; }
 [data-testid="stVerticalBlockBorderWrapper"]:nth-child(3) { animation-delay: 0.3s; }
-[data-testid="stVerticalBlockBorderWrapper"]:nth-child(4) { animation-delay
+[data-testid="stVerticalBlockBorderWrapper"]:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* ヘッダーテキスト */
+.header-title { 
+    font-size: 2.8rem; 
+    font-weight: 700; 
+    color: #3D2D2E; /* 濃いローズグレー */
+    letter-spacing: 0.05em; 
+    text-shadow: 0px 2px 4px rgba(255,255,255,1); 
+}
+.header-subtitle { 
+    font-size: 1.25rem; 
+    color: #5C4B4D; 
+    margin-top: 1.2rem; 
+    line-height: 1.8; 
+    font-weight: 600;
+    text-shadow: 0px 2px 4px rgba(255,255,255,1); 
+}
+
+/* カテゴリ見出し */
+.category-header {
+    border-left: 5px solid #DB90A0; /* 桜色アクセント */
+    padding-left: 15px;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #4A3B3D;
+    border-bottom: 1px solid #EAE1E3;
+    padding-bottom: 10px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* ボタンのデザイン（桜色ベース） */
+[data-testid="stLinkButton"] {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+[data-testid="stLinkButton"] a,
+[data-testid="stLinkButton"] button {
+    background-color: #DB90A0 !important; /* 落ち着いた大人の桜色 */
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.7rem 2.5rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(219, 144, 160, 0.2) !important; /* 影も淡い桜色 */
+    letter-spacing: 0.05em;
+}
+[data-testid="stLinkButton"] a *,
+[data-testid="stLinkButton"] button * {
+    color: #ffffff !important;
+}
+
+/* ★ホバー（マウスを乗せた時）の動きと色変化 */
+[data-testid="stLinkButton"] a:hover,
+[data-testid="stLinkButton"] button:hover {
+    background-color: #C27082 !important; /* 同系色で一段階深い色へ変化 */
+    box-shadow: 0 6px 12px rgba(194, 112, 130, 0.3) !important;
+    transform: translateY(-3px); /* ボタン自体もフワッと浮く */
+}
+
+/* テキスト色調整 */
+h3 { color: #4A3B3D !important; }
+p { font-size: 1.05rem; color: #5C4B4D; line-height: 1.7; }
+</style>
+""", unsafe_allow_html=True)
+
+# --- トップ画面ヘッダー ---
+st.markdown('''
+<div class="header-box">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+        <div class="header-title">C.HARIGOMA キャリア支援ポータル</div>
+        <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
+    </div>
+</div>
+''', unsafe_allow_html=True)
+
+# ==================================================
+# 【応募書類関連】
+# ==================================================
+st.markdown('<div class="category-header">【応募書類関連】</div>', unsafe_allow_html=True)
+
+col1, col2 = st.columns(2)
+with col1:
+    with st.container(border=True):
+        st.subheader("📝 志望動機添削アシスタント")
+        st.write("ご自身で書いた志望動機を、求人情報と照らし合わせてプロの視点で添削・ブラッシュアップします。")
+        st.link_button("アプリを開く", "https://career-shibou-app.streamlit.app/")
+with col2:
+    with st.container(border=True):
+        st.subheader("🌱 ゼロから育てる！志望動機作成アシスタント")
+        st.write("AIとの対話を通じてあなたの中にある強みを引き出し、納得のいく志望動機をゼロから一緒に作ります。")
+        st.link_button("アプリを開く", "https://harigoma-motivation.streamlit.app/")
+
+col3, col4 = st.columns(2)
+with col3:
+    with st.container(border=True):
+        st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
+        st.write("職務経歴から「役割・行動・結果」を整理し、自己PRの基礎となる素材（棚卸しシート）を作ります。")
+        st.link_button("アプリを開く", "https://harigoma-inventory.streamlit.app/")
+with col4:
+    with st.container(border=True):
+        st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
+        st.write("40の質問から仕事の軸を特定し、ステップ1の素材と組み合わせて自己PRを完成させます。")
+        st.link_button("アプリを開く", "https://harigoma-anchor.streamlit.app/")
+
+
+# ==================================================
+# 【自己理解・仕事理解関連】
+# ==================================================
+st.markdown('<div class="category-header">【自己理解・仕事理解関連】</div>', unsafe_allow_html=True)
+
+col5, col6 = st.columns(2)
+with col5:
+    with st.container(border=True):
+        st.subheader("✨ 自己資源・強み発見アシスタント")
+        st.write("これまでの何気ない経験から、ビジネスで通用する「強み」や「ポータブルスキル」を見つけ出します。")
+        st.link_button("アプリを開く", "https://skills-translation-app.streamlit.app/")
+with col6:
+    with st.container(border=True):
+        st.subheader("🧩 自己理解から仕事理解へ：わたしに合う働き方発見アシスタント")
+        st.write("職種名の先入観を外し、あなたが本当に安心できる働き方（環境）をAIと一緒に見つけます。")
+        st.link_button("アプリを開く", "https://harigoma-job-style.streamlit.app/")
+
+
+# ==================================================
+# 【メンタル】
+# ==================================================
+st.markdown('<div class="category-header">【メンタル】</div>', unsafe_allow_html=True)
+
+col7, col8 = st.columns(2)
+with col7:
+    with st.container(border=True):
+        st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
+        st.write("就活や仕事でのストレスを吐き出し、気持ちが軽くなる「新しい捉え方」を一緒に見つけます。")
+        st.link_button("アプリを開く", "https://abcde-support-app.streamlit.app/")
+
+with col8:
+    st.write("") 
+
+st.markdown("---")
+st.caption("© C.HARIGOMA Career Support")
