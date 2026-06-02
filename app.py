@@ -35,7 +35,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(10px); 
     border-radius: 12px !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
-    padding: 15px !important; /* PCでは少しゆったりめの余白 */
+    padding: 15px !important;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
@@ -114,30 +114,19 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
 h3 { color: #4A3B3D !important; font-size: 1.4rem !important; }
 p { font-size: 1.05rem; color: #5C4B4D; line-height: 1.7; }
 
-/* ★6. スマートフォン向けの画面表示設定（レスポンシブ対応の完成版） */
+/* 6. スマートフォン向けの画面表示設定（レスポンシブ対応の完成版） */
 @media screen and (max-width: 768px) {
-    /* 大見出し・サブタイトル */
     .header-title { font-size: 1.5rem !important; }
     .header-subtitle { font-size: 0.95rem !important; margin-top: 0.8rem !important; }
     .header-box { padding: 3rem 1rem !important; }
-    
-    /* カテゴリ（【応募書類関連】など） */
     .category-header { font-size: 1.2rem !important; margin-top: 2rem !important; }
-    
-    /* 各アプリのタイトル（ここを小さくしました！） */
     h3 { font-size: 1.1rem !important; line-height: 1.4 !important; margin-bottom: 0.5rem !important; }
-    
-    /* 各アプリの説明文 */
     p { font-size: 0.9rem !important; line-height: 1.6 !important; }
-    
-    /* アプリカードの枠内の余白を少し詰める */
     [data-testid="stVerticalBlockBorderWrapper"] { padding: 10px !important; }
-    
-    /* スマホ用ボタン調整 */
     [data-testid="stLinkButton"] a, [data-testid="stLinkButton"] button {
         padding: 0.6rem 1.5rem !important;
         font-size: 1rem !important;
-        width: 100% !important; /* スマホではボタンを横幅いっぱいにすると押しやすい */
+        width: 100% !important;
         text-align: center;
     }
 }
@@ -208,7 +197,8 @@ with col3:
     with st.container(border=True):
         st.subheader("🛠️ 自己PR作成ステップ1：キャリアの棚卸し")
         st.write("職務経歴から「役割・行動・結果」を整理し、自己PRの基礎となる素材（棚卸しシート）を作ります。")
-        st.link_button("アプリを開く", "https://harigoma-inventory.streamlit.app/")
+        # ★ここを新しいURLに書き換えました！
+        st.link_button("アプリを開く", "https://pr-step1-tanaoroshi.streamlit.app/")
 with col4:
     with st.container(border=True):
         st.subheader("🧩 自己PR作成ステップ2：キャリア・アンカー診断 ＆ 設計")
