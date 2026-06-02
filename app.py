@@ -35,7 +35,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(10px); 
     border-radius: 12px !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
-    padding: 10px !important;
+    padding: 15px !important; /* PCでは少しゆったりめの余白 */
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
@@ -95,7 +95,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     text-shadow: 0px 2px 4px rgba(255,255,255,1); 
 }
 
-/* カテゴリ見出し */
+/* カテゴリ見出し（PC用） */
 .category-header {
     border-left: 5px solid #DB90A0; 
     padding-left: 15px;
@@ -110,25 +110,39 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* 6. スマートフォン向けの画面表示設定（レスポンシブ対応） */
+/* テキスト色調整（PC用） */
+h3 { color: #4A3B3D !important; font-size: 1.4rem !important; }
+p { font-size: 1.05rem; color: #5C4B4D; line-height: 1.7; }
+
+/* ★6. スマートフォン向けの画面表示設定（レスポンシブ対応の完成版） */
 @media screen and (max-width: 768px) {
-    .header-title { 
-        font-size: 1.5rem !important; 
-    }
-    .header-subtitle { 
-        font-size: 0.95rem !important; 
-        margin-top: 0.8rem !important;
-    }
-    .header-box {
-        padding: 3rem 1rem !important; 
-    }
-    .category-header {
-        font-size: 1.3rem !important; 
-        margin-top: 2rem !important;
+    /* 大見出し・サブタイトル */
+    .header-title { font-size: 1.5rem !important; }
+    .header-subtitle { font-size: 0.95rem !important; margin-top: 0.8rem !important; }
+    .header-box { padding: 3rem 1rem !important; }
+    
+    /* カテゴリ（【応募書類関連】など） */
+    .category-header { font-size: 1.2rem !important; margin-top: 2rem !important; }
+    
+    /* 各アプリのタイトル（ここを小さくしました！） */
+    h3 { font-size: 1.1rem !important; line-height: 1.4 !important; margin-bottom: 0.5rem !important; }
+    
+    /* 各アプリの説明文 */
+    p { font-size: 0.9rem !important; line-height: 1.6 !important; }
+    
+    /* アプリカードの枠内の余白を少し詰める */
+    [data-testid="stVerticalBlockBorderWrapper"] { padding: 10px !important; }
+    
+    /* スマホ用ボタン調整 */
+    [data-testid="stLinkButton"] a, [data-testid="stLinkButton"] button {
+        padding: 0.6rem 1.5rem !important;
+        font-size: 1rem !important;
+        width: 100% !important; /* スマホではボタンを横幅いっぱいにすると押しやすい */
+        text-align: center;
     }
 }
 
-/* 7. ボタンのデザイン */
+/* 7. ボタンのデザイン（PC用ベース） */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
@@ -158,10 +172,6 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 6px 12px rgba(194, 112, 130, 0.3) !important;
     transform: translateY(-3px); 
 }
-
-/* テキスト色調整 */
-h3 { color: #4A3B3D !important; }
-p { font-size: 1.05rem; color: #5C4B4D; line-height: 1.7; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -186,7 +196,7 @@ with col1:
     with st.container(border=True):
         st.subheader("📝 志望動機添削アシスタント")
         st.write("ご自身で書いた志望動機を、求人情報と照らし合わせてプロの視点で添削・ブラッシュアップします。")
-        st.link_button("アプリを開く", "https://career-shibou-app.streamlit.app/")
+        st.link_button("アプリを開く", "https://career-shibou.streamlit.app/")
 with col2:
     with st.container(border=True):
         st.subheader("🌱 ゼロから育てる！志望動機作成アシスタント")
