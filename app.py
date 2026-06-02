@@ -2,7 +2,7 @@ import streamlit as st
 import base64
 import os
 
-# --- ページ設定（正しい関数名に修正しました） ---
+# --- ページ設定 ---
 st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
 
 @st.cache_data
@@ -240,7 +240,7 @@ with col6:
 
 
 # ==================================================
-# 【面接対策関連】
+# 【面接対策関連】（★正しいURLに修正しました）
 # ==================================================
 st.markdown('<div class="category-header">【面接対策関連】</div>', unsafe_allow_html=True)
 
@@ -249,7 +249,7 @@ with col9:
     with st.container(border=True):
         st.subheader("🗣️ AI面接練習アシスタント")
         st.write("面接官のタイプや特訓したいテーマに合わせ、スマートフォンやPCのマイクを使って本番さながらの音声面接練習を行います。")
-        st.link_button("アプリを開く", "https://harigoma-interview-app.streamlit.app/")
+        st.link_button("アプリを開く", "https://harigoma-interview.streamlit.app/")
 with col10:
     st.write("") 
 
