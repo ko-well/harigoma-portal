@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit st
 import base64
 import os
 
@@ -78,12 +78,12 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
 
 /* 2. ページ全体の壁紙（上品な和紙風テクスチャ） */
 .stApp {
-    background-color: #FCFAFA; /* ほんの少し温かみのある白 */
+    background-color: #FCFAFA; 
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
     background-attachment: fixed;
 }
 
-/* 3. アニメーションの定義（キーフレーム） */
+/* 3. アニメーションの定義 */
 @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -102,30 +102,20 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
     padding: 10px !important;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    
-    /* 初期表示時の浮き上がりアニメーション */
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
 }
-/* ホバー（マウスオーバー）時の動き */
 [data-testid="stVerticalBlockBorderWrapper"]:hover {
     transform: translateY(-8px) !important;
     box-shadow: 0 12px 25px rgba(0,0,0,0.08) !important;
     background-color: rgba(255, 255, 255, 1) !important;
 }
 
-/* カードのアニメーションのタイミングをずらす */
-[data-testid="stVerticalBlockBorderWrapper"]:nth-child(1) { animation-delay: 0.1s; }
-[data-testid="stVerticalBlockBorderWrapper"]:nth-child(2) { animation-delay: 0.2s; }
-[data-testid="stVerticalBlockBorderWrapper"]:nth-child(3) { animation-delay: 0.3s; }
-[data-testid="stVerticalBlockBorderWrapper"]:nth-child(4) { animation-delay: 0.4s; }
-
-
 /* ヘッダーテキスト */
 .header-title { 
     font-size: 2.8rem; 
     font-weight: 700; 
-    color: #3D2D2E; /* 濃いローズグレー */
+    color: #3D2D2E; 
     letter-spacing: 0.05em; 
     text-shadow: 0px 2px 4px rgba(255,255,255,1); 
 }
@@ -140,7 +130,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
 
 /* カテゴリ見出し */
 .category-header {
-    border-left: 5px solid #DB90A0; /* 桜色アクセント */
+    border-left: 5px solid #DB90A0; 
     padding-left: 15px;
     margin-top: 4rem;
     margin-bottom: 2rem;
@@ -153,7 +143,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ボタンのデザイン（桜色ベース） */
+/* ボタンのデザイン */
 [data-testid="stLinkButton"] {
     display: flex;
     justify-content: flex-end;
@@ -161,7 +151,7 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
 }
 [data-testid="stLinkButton"] a,
 [data-testid="stLinkButton"] button {
-    background-color: #DB90A0 !important; /* 落ち着いた大人の桜色 */
+    background-color: #DB90A0 !important; 
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
@@ -170,20 +160,18 @@ html, body, p, div, span, a, button, h1, h2, h3, h4, h5, h6 {
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(219, 144, 160, 0.2) !important; /* 影も淡い桜色 */
+    box-shadow: 0 4px 6px rgba(219, 144, 160, 0.2) !important; 
     letter-spacing: 0.05em;
 }
 [data-testid="stLinkButton"] a *,
 [data-testid="stLinkButton"] button * {
     color: #ffffff !important;
 }
-
-/* ★ホバー（マウスを乗せた時）の動きと色変化 */
 [data-testid="stLinkButton"] a:hover,
 [data-testid="stLinkButton"] button:hover {
-    background-color: #C27082 !important; /* 同系色で一段階深い色へ変化 */
+    background-color: #C27082 !important; 
     box-shadow: 0 6px 12px rgba(194, 112, 130, 0.3) !important;
-    transform: translateY(-3px); /* ボタン自体もフワッと浮く */
+    transform: translateY(-3px); 
 }
 
 /* テキスト色調整 */
@@ -198,7 +186,7 @@ st.markdown('''
     <div class="header-overlay"></div>
     <div class="header-content">
         <div class="header-title">C.HARIGOMA キャリア支援ポータル</div>
-        <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
+        <div class="header-subtitle">新潟でキャリアを切り拓くあなたへ。<br>自己理解から応募書類の作成、面接対策、メンタルケアまでを一貫してサポートする統合プラットフォームです。</div>
     </div>
 </div>
 ''', unsafe_allow_html=True)
@@ -252,6 +240,21 @@ with col6:
 
 
 # ==================================================
+# ★新設【面接対策関連】
+# ==================================================
+st.markdown('<div class="category-header">【面接対策関連】</div>', unsafe_allow_html=True)
+
+col9, col10 = st.columns(2)
+with col9:
+    with st.container(border=True):
+        st.subheader("🗣️ AI面接練習アシスタント")
+        st.write("面接官のタイプや特訓したいテーマに合わせ、スマートフォンやPCのマイクを使って本番さながらの音声面接練習を行います。")
+        st.link_button("アプリを開く", "https://harigoma-interview-app.streamlit.app/")
+with col10:
+    st.write("") # レイアウト調整用
+
+
+# ==================================================
 # 【メンタル】
 # ==================================================
 st.markdown('<div class="category-header">【メンタル】</div>', unsafe_allow_html=True)
@@ -262,7 +265,6 @@ with col7:
         st.subheader("💡 心のモヤモヤ解消・ストレスケアアシスタント")
         st.write("就活や仕事でのストレスを吐き出し、気持ちが軽くなる「新しい捉え方」を一緒に見つけます。")
         st.link_button("アプリを開く", "https://abcde-support-app.streamlit.app/")
-
 with col8:
     st.write("") 
 
