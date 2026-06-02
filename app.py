@@ -2,8 +2,8 @@ import streamlit as st
 import base64
 import os
 
-# --- ページ設定 ---
-st.set_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
+# --- ページ設定（正しい関数名に修正しました） ---
+st.set_page_config(page_title="C.HARIGOMA キャリア支援ポータル", layout="wide")
 
 @st.cache_data
 def get_base64_of_bin_file(bin_file):
